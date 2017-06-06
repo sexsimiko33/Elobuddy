@@ -82,7 +82,7 @@ namespace SexsiCaitlyn
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && Target is AIHeroClient && Target.IsValidTarget())
             {
-                if (Hero.Level <= EBeforeLevel.CurrentValue && E.CastMinimumHitchance((AIHeroClient)Target, 60) && E.GetPrediction((AIHeroClient)Target).HitChance != HitChance.Collision)
+                if (Hero.Level <= EBeforeLevel.CurrentValue && E.CastMinimumHitchance((AIHeroClient)Target, 90) && E.GetPrediction((AIHeroClient)Target).HitChance != HitChance.Collision)
                 {
                     UseNetCombo = true;
                     ComboTarget = (AIHeroClient)Target;
