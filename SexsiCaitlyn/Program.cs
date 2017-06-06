@@ -162,7 +162,7 @@ namespace SexsiCaitlyn
 
                         if (target == null) return;
 
-                        if (Q.CastMinimumHitchance(target, 60)) { return; }
+                        if (Q.CastMinimumHitchance(target, 80)) { return; }
                     }
                 }
             }
@@ -249,7 +249,7 @@ namespace SexsiCaitlyn
                 {
                     if (SafeQKS.CurrentValue && flDistance > 675 && Hero.CountEnemyChampionsInRange(650) == 0 && Q.GetSpellDamage(Enemy) > Enemy.TotalShieldHealth())
                     {
-                        if (Q.CastMinimumHitchance(Enemy, 60)) { return; }
+                        if (Q.CastMinimumHitchance(Enemy, 80)) { return; }
                     }
 
                     if (RInCombo.CurrentValue && flDistance < new[] { 2000, 2500, 3000 }[Hero.Spellbook.GetSpell(SpellSlot.R).Level - 1] && flDistance > UltRange.CurrentValue && Hero.Spellbook.GetSpell(SpellSlot.R).IsReady && Enemy.TotalShieldHealth() - Hero.GetSpellDamage(Enemy, SpellSlot.R) < 0 && Hero.CountEnemyChampionsInRange(UltRange.CurrentValue) == 0)
