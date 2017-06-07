@@ -111,6 +111,8 @@ namespace SexsiTwitch
                 WUnderTurret = ExtraMenu.Add("WUnderTurret", new CheckBox("Use W if Under Enemy Turret", false));
                 SaveManaForE = ExtraMenu.Add("SaveManaForE", new CheckBox("Save Mana for E"));
 
+                PassiveManager.Init();
+
                 Drawing.OnEndScene += Drawing_OnEndScene;
                 Game.OnUpdate += Game_OnUpdate;
                 Spellbook.OnCastSpell += Spellbook_OnCastSpell;
