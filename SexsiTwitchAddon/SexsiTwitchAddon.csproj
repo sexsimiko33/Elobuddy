@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{280C349C-7F7D-420F-8E86-EAD48CE423B1}</ProjectGuid>
+    <ProjectGuid>{53DF9EB2-1D0D-46E2-AE6C-217292ACD71E}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Sexsimiko7AIO</RootNamespace>
-    <AssemblyName>Sexsimiko7AIO</AssemblyName>
+    <RootNamespace>SexsiTwitchAddon</RootNamespace>
+    <AssemblyName>SexsiTwitchAddon</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,18 +35,14 @@
     <Reference Include="EloBuddy">
       <HintPath>D:\EloBuddy\System\EloBuddy.dll</HintPath>
     </Reference>
+    <Reference Include="EloBuddy.Sandbox">
+      <HintPath>D:\EloBuddy\System\EloBuddy.Sandbox.dll</HintPath>
+    </Reference>
     <Reference Include="EloBuddy.SDK">
       <HintPath>D:\EloBuddy\System\EloBuddy.SDK.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX">
-      <HintPath>D:\EloBuddy\System\SharpDX.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct3D9">
-      <HintPath>D:\EloBuddy\System\SharpDX.Direct3D9.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,14 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Caitlyn\Caitlyn.cs" />
-    <Compile Include="Lucian\Lucian.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
