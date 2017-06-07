@@ -33,7 +33,10 @@ namespace SexsiTwitch
             QRecall,
             WUnderTurret,
             SaveManaForE,
-            DrawQTime;
+            DrawQTime,
+            DrawRTime,
+            DrawEStacks,
+            DrawEStacksTime;
 
         private static Slider QInRange, ComboECustomStacks, HarassWMana;
 
@@ -43,7 +46,9 @@ namespace SexsiTwitch
 
         private static Spell.Skillshot W;
 
-        private static Spell.Active Q, E, R;
+        private static Spell.Active Q;
+        public static Spell.Active E;
+        private static Spell.Active R;
 
         private static AIHeroClient Hero => Player.Instance;
 
@@ -75,6 +80,9 @@ namespace SexsiTwitch
                 DrawR = DrawMenu.Add("DrawR", new CheckBox("Draw R Range"));
                 DrawEDamage = DrawMenu.Add("DrawEDamage", new CheckBox("Draw E Damage"));
                 DrawQTime = DrawMenu.Add("DrawQTime", new CheckBox("Draw Q Time"));
+                DrawEStacks = DrawMenu.Add("DrawEStacks", new CheckBox("Draw E Stacks"));
+                DrawEStacksTime = DrawMenu.Add("DrawEStacksTime", new CheckBox("Draw E Stack Time"));
+                DrawRTime = DrawMenu.Add("DrawRTime", new CheckBox("Draw R Time"));
 
                 //COMBO MENU
                 var ComboMenu = TwitchMenu.AddSubMenu("Combo");
@@ -172,9 +180,35 @@ namespace SexsiTwitch
                     ObjectManager.Player.Position.Y - 30,
                     ObjectManager.Player.Position.Z);
                 position.DrawTextOnScreen(
-                    "Stealth:  " + $"{ObjectManager.Player.GetRemainingBuffTime("TwitchHideInShadows"):0.0}",
+                    "Stealth:  " + $"{Hero.GetRemainingBuffTime("TwitchHideInShadows"):0.0}",
                     Color.AntiqueWhite);
             }
+
+            if (DrawRTime.CurrentValue
+                && Hero.HasBuff("TwitchFullAutomatic"))
+            {
+                Hero.Position.DrawTextOnScreen(
+                    "Ultimate:  " + $"{Hero.GetRemainingBuffTime("TwitchFullAutomatic"):0.0}",
+                    Color.AntiqueWhite);
+            }
+
+            if (DrawEStacks.CurrentValue)
+                foreach (var source in
+                    EntityManager.Heroes.Enemies.Where(x => x.HasBuff("TwitchDeadlyVenom") && !x.IsDead && x.IsVisible))
+                {
+                    var position = new Vector3(source.Position.X, source.Position.Y + 10, source.Position.Z);
+                    position.DrawTextOnScreen($"{"Stacks: " + source.PassiveCount()}", Color.AntiqueWhite);
+                }
+
+            if (DrawEStacksTime.CurrentValue)
+                foreach (var source in
+                    EntityManager.Heroes.Enemies.Where(x => x.HasBuff("TwitchDeadlyVenom") && !x.IsDead && x.IsVisible))
+                {
+                    var position = new Vector3(source.Position.X, source.Position.Y - 30, source.Position.Z);
+                    position.DrawTextOnScreen(
+                        "Stack Timer:  " + $"{source.GetRemainingBuffTime("TwitchDeadlyVenom"):0.0}",
+                        Color.AntiqueWhite);
+                }
         }
 
         private static void Orbwalker_OnPostAttack(AttackableUnit Target, EventArgs args)
