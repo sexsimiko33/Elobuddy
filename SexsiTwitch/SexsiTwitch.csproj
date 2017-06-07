@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{53DF9EB2-1D0D-46E2-AE6C-217292ACD71E}</ProjectGuid>
+    <ProjectGuid>{223ABEA2-FF38-4CBD-A404-D5FE8BD4FFFB}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SexsiTwitchAddon</RootNamespace>
-    <AssemblyName>SexsiTwitchAddon</AssemblyName>
+    <RootNamespace>SexsiTwitch</RootNamespace>
+    <AssemblyName>SexsiTwitch</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,18 +31,25 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SexsiTwitch.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EloBuddy">
       <HintPath>D:\EloBuddy\System\EloBuddy.dll</HintPath>
     </Reference>
-    <Reference Include="EloBuddy.Sandbox">
-      <HintPath>D:\EloBuddy\System\EloBuddy.Sandbox.dll</HintPath>
-    </Reference>
     <Reference Include="EloBuddy.SDK">
       <HintPath>D:\EloBuddy\System\EloBuddy.SDK.dll</HintPath>
     </Reference>
+    <Reference Include="SharpDX">
+      <HintPath>D:\EloBuddy\System\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D9">
+      <HintPath>D:\EloBuddy\System\SharpDX.Direct3D9.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PassiveManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
