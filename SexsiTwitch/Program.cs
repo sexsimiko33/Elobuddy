@@ -13,7 +13,7 @@ using Color = System.Drawing.Color;
 
 namespace SexsiTwitch
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
@@ -32,7 +32,8 @@ namespace SexsiTwitch
             EJungleKS,
             QRecall,
             WUnderTurret,
-            SaveManaForE;
+            SaveManaForE,
+            DrawQTime;
 
         private static Slider QInRange, ComboECustomStacks, HarassWMana;
 
@@ -73,6 +74,7 @@ namespace SexsiTwitch
                 DrawE = DrawMenu.Add("DrawE", new CheckBox("Draw E Range"));
                 DrawR = DrawMenu.Add("DrawR", new CheckBox("Draw R Range"));
                 DrawEDamage = DrawMenu.Add("DrawEDamage", new CheckBox("Draw E Damage"));
+                DrawQTime = DrawMenu.Add("DrawQTime", new CheckBox("Draw Q Time"));
 
                 //COMBO MENU
                 var ComboMenu = TwitchMenu.AddSubMenu("Combo");
@@ -114,6 +116,21 @@ namespace SexsiTwitch
             }
         }
 
+        private static float GetRemainingBuffTime(this Obj_AI_Base target, string buffName)
+        {
+            return
+                target.Buffs.OrderByDescending(buff => buff.EndTime - Game.Time)
+                    .Where(buff => string.Equals(buff.Name, buffName, StringComparison.CurrentCultureIgnoreCase))
+                    .Select(buff => buff.EndTime)
+                    .FirstOrDefault() - Game.Time;
+        }
+
+        private static void DrawTextOnScreen(this Vector3 location, string message, Color colour)
+        {
+            var worldToScreen = Drawing.WorldToScreen(location);
+            Drawing.DrawText(worldToScreen[0] - message.Length * 5, worldToScreen[1] - 200, colour, message);
+        }
+
         private static void Drawing_OnDraw(EventArgs args)
         {
             if (DrawReady.CurrentValue)
@@ -145,6 +162,18 @@ namespace SexsiTwitch
                 {
                     Circle.Draw(new ColorBGRA(DrawColor.ToArgb()), rRange, Hero);
                 }
+            }
+
+            if (DrawQTime.CurrentValue
+                && Hero.HasBuff("TwitchHideInShadows"))
+            {
+                var position = new Vector3(
+                    ObjectManager.Player.Position.X,
+                    ObjectManager.Player.Position.Y - 30,
+                    ObjectManager.Player.Position.Z);
+                position.DrawTextOnScreen(
+                    "Stealth:  " + $"{ObjectManager.Player.GetRemainingBuffTime("TwitchHideInShadows"):0.0}",
+                    Color.AntiqueWhite);
             }
         }
 
